@@ -1,8 +1,8 @@
 const dbConfig = {
     HOST: "localhost",
-    USER: "root",
-    PASSWORD: "123456",
-    DB: "testdb",
+    USER: "datnek",
+    PASSWORD: "datnek",
+    DB: "datnek",
     dialect: "mysql",
 };
 
