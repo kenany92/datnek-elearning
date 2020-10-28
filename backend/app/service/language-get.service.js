@@ -7,7 +7,7 @@ const service = {};
  * Get all languages
  * @returns {Promise}
  */
-service.getAll = (req, res) => {
+service.getAll = () => {
     return Language.findAll();
 };
 

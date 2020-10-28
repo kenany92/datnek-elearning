@@ -1,21 +1,29 @@
 var router = require('express').Router();
+const Factory = require('../model');
+const Language = Factory.languages;
 var createService = require('../service/language-create.service');
 var getService = require('../service/language-get.service');
-const BASE_PATH = '/language';
+
+// const BASE_PATH = '/api/language';
 
 /**
  * Create language api
  */
-router.post(BASE_PATH, (req, res) => {
+router.post('/', (req, res) => {
+
+    console.log('************** call create language ****************');
 
     try {
         createService.create(req.body).then((created) => {
-        res.status(201).send(created);
-    }).catch((err) => {
+            // console.log(created);
+        res.status(201).json(created);
+    })
+    .catch((err) => {
         res.status(500).send({message: 'An error occure while saving the language'})
     });
     } catch(err) {
-        res.status(400).send(err);
+        console.log(err);
+        res.status(400).send(err.message);
     }
 
 });
@@ -23,10 +31,10 @@ router.post(BASE_PATH, (req, res) => {
 /**
  * Get all languages api
  */
-router.get(BASE_PATH, (req, res) => {
+router.get('/', (req, res) => {
 
     getService.getAll().then((languages) => {
-        res.send(languages);
+        res.status(200).send(languages);
     }).catch((err) => {
         res.status(404).send({message: 'An error occure while retieving languages'})
     });
@@ -36,8 +44,8 @@ router.get(BASE_PATH, (req, res) => {
 /**
  * Get single language api
  */
-router.get(`${BASE_PATH}/:id`, (req, res) => {
-    
+router.get(`/:id`, (req, res) => {
+
     const id = req.params.id;
 
     getService.get(id).then((language) => {
@@ -47,3 +55,5 @@ router.get(`${BASE_PATH}/:id`, (req, res) => {
     });
 
 });
+
+module.exports = router

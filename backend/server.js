@@ -1,17 +1,29 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+function buildServer() {
 
-const app = express();
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const cors = require('cors');
+    const languageResourse = require('./app/api/language.resource');
 
-app.use(cors({origin: 'http://localhost:4200'}))
+    const app = express();
 
-app.use(bodyParser.json());
+    app.use(cors({origin: 'http://localhost:4200'}))
 
-const db = require('./app/model');
+    app.use(bodyParser.json());
 
-db.Sequelize.sync();
+    const db = require('./app/model');
 
-app.listen(3000, () => {
+    db.sequelize.sync();
 
-});
+    app.use('/api/languages', languageResourse);
+
+    const PORT = process.env.PORT || 3000;
+    
+    app.listen(PORT, () => {
+        console.log('Server started');
+    });  
+    
+    // return server;
+}
+
+module.exports = buildServer;
