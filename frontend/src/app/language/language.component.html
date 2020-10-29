@@ -1,0 +1,152 @@
+<div fxLayout="column" class="container">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between">
+        <mat-button-toggle-group name="Languages" aria-label="Languages" (change)="loadLanguage($event.value)">
+            <mat-button-toggle value="en">{{ 'ENGLISH' | translate }}</mat-button-toggle>
+            <mat-button-toggle value="fr">{{ 'FRENCH' | translate }}</mat-button-toggle>
+            <mat-button-toggle value="nl">{{ 'DUTCH' | translate }}</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <button mat-raised-button [ngStyle]="{'background-color': modalStatus.color, color: 'white'}"> {{ modalStatus.message | translate }} </button>
+    </div>
+
+    <div class="mat-h2">{{selectedLang | translate}}</div>
+
+    <div class="mat-h1 mt-20 mb-15">{{'ADD_LANGUAGE' | translate}}</div>
+
+    <div fxLayout.lg="row" fxLayout="column" fxLayoutGap="10px">
+
+      <form [formGroup]="languageForm" fxFlex="66" fxLayout="column" (ngSubmit)="save()">
+
+        <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+
+        <div fxFlex="50" fxLayout="column">
+
+          <div fxFlex="50">
+
+            <h4> {{'CHOOSE_LANGUAGE' | translate }} </h4>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label> {{'CHOOSE_ITEM' | translate }} * </mat-label>
+              <mat-select formControlName="name">
+                <mat-option></mat-option>
+                <mat-option value="ENGLISH"> {{ 'ENGLISH' | translate }} </mat-option>
+                <mat-option value="FRENCH"> {{ 'FRENCH' | translate }} </mat-option>
+                <mat-option value="DUTCH"> {{ 'DUTCH' | translate }} </mat-option>
+              </mat-select>
+              <mat-error *ngIf="languageForm.get('name')?.errors?.required"> {{ 'CHOOSE_LANGUAGE_REQUIRED_ERROR' | translate }} </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <div fxFlex="50">
+
+            <h4> {{ 'WRITTEN_LEVEL' | translate }} </h4>
+            <mat-form-field class="full-width" appearance="outline">
+
+              <mat-label> {{'CHOOSE_ITEM' | translate }} * </mat-label>
+              <mat-select formControlName="written">
+                <mat-option></mat-option>
+                <mat-option value="NO"> {{ 'NO' | translate }} </mat-option>
+                <mat-option value="WEAK"> {{ 'WEAK' | translate }} </mat-option>
+                <mat-option value="MEDIUM"> {{ 'MEDIUM' | translate }} </mat-option>
+                <mat-option value="GOOD"> {{ 'GOOD' | translate }} </mat-option>
+                <mat-option value="EXPERT"> {{ 'EXPERT' | translate }} </mat-option>
+              </mat-select>
+              <mat-error *ngIf="languageForm.get('written')?.errors?.required"> {{ 'CHOOSE_WRITTEN_LEVEL_REQUIRED_ERROR' | translate }} </mat-error>
+            </mat-form-field>
+
+          </div>
+
+        </div>
+        <div fxFlex="50" fxLayout="column">
+
+          <div fxFlex="50">
+
+            <h4> {{'SPOKEN_LEVEL' | translate }} </h4>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label> {{'CHOOSE_ITEM' | translate }} * </mat-label>
+              <mat-select formControlName="spoken">
+                <mat-option></mat-option>
+                <mat-option value="NO"> {{ 'NO' | translate }} </mat-option>
+                <mat-option value="WEAK"> {{ 'WEAK' | translate }} </mat-option>
+                <mat-option value="MEDIUM"> {{ 'MEDIUM' | translate }} </mat-option>
+                <mat-option value="GOOD"> {{ 'GOOD' | translate }} </mat-option>
+                <mat-option value="EXPERT"> {{ 'EXPERT' | translate }} </mat-option>
+              </mat-select>
+              <mat-error *ngIf="languageForm.get('spoken')?.errors?.required"> {{ 'CHOOSE_SPOKEN_LEVEL_REQUIRED_ERROR' | translate }} </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <div fxFlex="50">
+
+            <h4> {{ 'UNDERSTANDING_LEVEL' | translate }} </h4>
+            <mat-form-field class="full-width" appearance="outline">
+
+              <mat-label> {{'CHOOSE_ITEM' | translate }} * </mat-label>
+              <mat-select formControlName="understanding">
+                <mat-option></mat-option>
+                <mat-option value="NO"> {{ 'NO' | translate }} </mat-option>
+                <mat-option value="WEAK"> {{ 'WEAK' | translate }} </mat-option>
+                <mat-option value="MEDIUM"> {{ 'MEDIUM' | translate }} </mat-option>
+                <mat-option value="GOOD"> {{ 'GOOD' | translate }} </mat-option>
+                <mat-option value="EXPERT"> {{ 'EXPERT' | translate }} </mat-option>
+              </mat-select>
+              <mat-error *ngIf="languageForm.get('understanding')?.errors?.required"> {{ 'CHOOSE_UNDERSTANDING_LEVEL_REQUIRED_ERROR' | translate }} </mat-error>
+            </mat-form-field>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div fxFlex fxLayout="row" fxLayout.xs="column">
+        <button mat-raised-button color="primary"> {{ 'SAVE' | translate }} </button>
+      </div>
+        
+        
+      </form>
+
+      <div fxFlex="33" fxLayout="column" fxLayout.lg="row" gdAlignColumns="center center">
+
+        <mat-card [ngClass.lg]="{'card-center-lg': true}" [ngClass]="{'card-center': true}" class="lightseagreen"> 
+
+          <mat-card-content class="text-lg">
+            {{ 'LANGUAGES_COUNT' | translate }} 
+            <p style="text-align: center; margin-top: 5px">{{languagesCount}}</p> 
+          </mat-card-content>
+
+          </mat-card>
+
+      </div>
+
+    </div>
+
+    <div fxFlex fxLayout="column">
+
+      <div fxFlex *ngIf="languagesCount" class="mat-h1 mt-20 mb-15">{{'LANGUAGES_LIST' | translate}}</div>
+
+      <div fxFlex fxLayout="column" *ngFor="let item of languages">
+        <mat-card fxFlex fxLayout.lg="row" fxLayout="column" style="margin-bottom: 10px;"> 
+          <div fxFlex="20">
+            <strong> {{item.name || '' | translate }} </strong> 
+          </div>
+          <div fxFlex="20">
+            <strong>{{ 'SPOKEN_LEVEL' | translate }}: </strong> {{ item.spoken || '' | translate }}
+          </div>
+          <div fxFlex="20">
+            <strong>{{ 'WRITTEN_LEVEL' | translate }}: </strong> {{ item.written || '' | translate}}
+          </div>
+          <div fxFlex="20">
+            <strong>{{ 'UNDERSTANDING_LEVEL' | translate }}: </strong> {{ item.understanding || '' | translate}}
+          </div>
+          <div fxFlex.lg="20" fxFlex fxLayout="row" fxLayoutGap="5px">
+            <button fxFlex mat-raised-button class="btn-green"> {{ 'EDIT' | translate }} </button>
+            <button fxFlex mat-raised-button class="btn-yellow" (click)="showModal(item)"> {{ 'SHOW' | translate }} </button>
+            <button fxFlex mat-raised-button color="warn"> {{ 'DELETE' | translate }} </button>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+</div>

@@ -26,4 +26,4 @@ function buildServer() {
     // return server;
 }
 
-module.exports = buildServer;
+module.exports = buildServer();

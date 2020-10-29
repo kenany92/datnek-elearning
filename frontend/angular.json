@@ -69,7 +69,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "datnek:build"
+            "browserTarget": "datnek:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {

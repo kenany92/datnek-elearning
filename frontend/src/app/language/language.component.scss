@@ -1,0 +1,55 @@
+.container {
+    padding: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.text-lg {
+    font-weight: 600;
+    font-size: x-large !important;
+}
+
+.btn-yellow {
+    background-color: rgb(248, 179, 52);
+    color: white;
+}
+
+.btn-green {
+    background-color: rgb(54, 201, 54);
+    color: white;
+}
+
+.card-center-lg {
+    width: 90%; 
+    height: 170px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-center {
+    width: 95%; 
+    height: 100px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightseagreen {
+    background-color: #1373d9d1;
+    color: white;
+}

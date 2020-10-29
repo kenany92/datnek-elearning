@@ -1,0 +1,25 @@
+<h2 mat-dialog-title> {{ 'DETAILS' | translate }} </h2>
+<mat-divider style="margin-bottom: 10px;"></mat-divider>
+
+<div mat-dialog-content>
+    <div fxLayout="column">
+        <div fxFlex fxLayout="column"> 
+        <div fxFlex>
+            <strong> {{language.name || '' | translate }} </strong> 
+        </div>
+        <div fxFlex>
+            <strong>{{ 'SPOKEN_LEVEL' | translate }}: </strong> {{ language.spoken || '' | translate }}
+        </div>
+        <div fxFlex>
+            <strong>{{ 'WRITTEN_LEVEL' | translate }}: </strong> {{ language.written || '' | translate}}
+        </div>
+        <div fxFlex>
+            <strong>{{ 'UNDERSTANDING_LEVEL' | translate }}: </strong> {{ language.understanding || '' | translate}}
+        </div>
+    </div>
+    </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close> {{ 'CLOSE' | translate }} </button>
+</div>
